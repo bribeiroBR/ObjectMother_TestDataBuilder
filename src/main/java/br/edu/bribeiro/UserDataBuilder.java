@@ -9,9 +9,15 @@ public class UserDataBuilder {
 
 	// DATA BUILDER APPROACH
 
-	// 1st I would like to create a kind of template values
-	// Then if nobody set any value we already have the default
+	// to make it works we basically need 4 things:
+	// 1- create a private constructor
+	// 2- create a static method that will be the entry point for all the others
+	// 3- return the Data Builder class it self in all method
+	// 4- a method to build the real object, it means, 1 method will return the
+	// object itself and not the Data Builder
 
+	// Here I am just creating a kind of template values
+	// Then if nobody set any value we already have the default
 	public static final String DEFAULT_NAME = "Ze Silva";
 	public static final String DEFAULT_USER_NAME = "zesilva";
 	public static final String DEFAULT_PASSWORD = "123456";
@@ -22,7 +28,13 @@ public class UserDataBuilder {
 	private String password = DEFAULT_PASSWORD;
 	private String role = DEFAULT_ROLE;
 
-	// this will just create a user with the default values
+	// turning the constructor private will ensure that nobody can create a
+	// object directly without using the methods and also the build
+	private UserDataBuilder() {
+	}
+
+	// turning this to static we can ensure that will only exist 1 instance of
+	// this object and make this method the entry point for all the rest
 	public static UserDataBuilder aUser() {
 		return new UserDataBuilder();
 	}
@@ -69,8 +81,8 @@ public class UserDataBuilder {
 		return UserDataBuilder.aUser().withName(name).withUsername(username).withPassword(password).asRole(role);
 	}
 
-	// this will always build the User
-	// and if we do not set any value it will use the default values
+	// here is where we really build our User and check that it returns the User
+	// and not the Data builder itself
 	public User build() {
 		return new User(name, username, password, role);
 	}

@@ -60,6 +60,7 @@ public class UserTestAndComparingTheApproaches {
 		assertTrue(user.getUserName().equalsIgnoreCase("brenoribeiro"));
 		assertTrue(user.getPassword().equalsIgnoreCase("123456"));
 		assertTrue(user.getRole().equalsIgnoreCase("ROLE_ADMIN"));
+
 	}
 
 }
